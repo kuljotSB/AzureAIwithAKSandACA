@@ -1,10 +1,12 @@
+![Exposing ACR Image to the Internet via Azure Load Balancer](./Assets/load_balancer_svc.png)
+
 ## Exposing ACR Image to the Internet via Azure Load Balancer
 
 Run the following command to expose the aoaichatapp Pod using a Service resource and make sure to set the selector to match the Pod label of the aoaichatapp Pod.
 
 ```bash
 kubectl expose deploy/aoaichatapp --selector app=aoaichatapp --name aoaichatapp-loadbalancer --type LoadBalancer
-``` 
+```
 
 The kubectl expose command creates a Service resource that acts as a load balancer for the nginx-blue Pod. The --selector flag specifies the label selector to use to match the Pod, and the --name flag specifies the name of the Service resource. The --type LoadBalancer flag specifies that the Service resource should be of type LoadBalancer, which will create an external Azure Load Balancer to route external traffic to the Service.
 

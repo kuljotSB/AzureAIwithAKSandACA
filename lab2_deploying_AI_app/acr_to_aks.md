@@ -1,3 +1,5 @@
+![Deploying AI App from ACR to AKS](./Assets/acr_to_aks.png)
+
 ## Deploy an AI App from ACR to AKS (Azure Container Registry to Azure Kubernetes Service)
 
 ### Using kubectl to create resource manifests

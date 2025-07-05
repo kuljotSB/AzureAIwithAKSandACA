@@ -1,3 +1,5 @@
+![Docker Desktop to ACR](./Assets/docker_desktop_to_acr.png)
+
 ## Build the Docker Image and Run the Container Locally
 
 The Dockerfile is a set of instructions that tells Docker how to build the container image. The FROM instruction specifies the base image to use. The ENV instruction sets an environment variable, and the EXPOSE instruction tells Docker which port the application will listen on.
