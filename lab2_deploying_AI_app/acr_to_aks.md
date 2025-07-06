@@ -8,6 +8,11 @@ Going back to the contoso-air application, we can create a Deployment resource t
 
 If you have never written a Kubernetes manifest file, you can use the Draft CLI to create a manifest file for you or use another common method which is to use the kubectl CLI to create a manifest file.
 
+First lets set the environment variable for the Azure Container Registry (ACR) name.
+```bash
+export ACR_NAME="your-acr-name"
+```
+
 Create a directory called manifests in the root of the repository to store the manifest files.
 ```bash
 mkdir manifests
