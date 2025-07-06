@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: aoaipythonapp
+  name: aoaipythonapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aoaipythonapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: aoaipythonapp
+    spec:
+      containers:
+      - image: kuljotaksregistry.azurecr.io/aoaipythonapp:latest
+        name: aoaipythonapp
+        ports:
+        - containerPort: 5000
+        resources: {}
+        envFrom:
+        - configMapRef:
+            name: aoaipythonapp-configs
+        - secretRef:
+            name: aoaipythonapp-secrets
+status: {}
