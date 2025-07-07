@@ -36,7 +36,7 @@ Deploy the Azure resources needed for the workshop.
 az deployment group create \
 --resource-group $RG_NAME \
 --name "${RG_NAME}-deployment" \
---template-uri https://raw.githubusercontent.com/Azure-Samples/aks-labs/refs/heads/main/docs/getting-started/assets/k8s-aks-fundamentals/main.json \
+--template-uri https://raw.githubusercontent.com/kuljotSB/AzureAIwithAKSandACA/refs/heads/main/infra/main.json \
 --parameters randomSeed=$RAND userObjectId=$(az ad signed-in-user show --query id -o tsv)
 ```
 
