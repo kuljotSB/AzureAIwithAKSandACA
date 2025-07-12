@@ -85,7 +85,7 @@ docker push $ACR_NAME.azurecr.io/chatbackend:latest
 ```
 
 ### Pushing our Frontend Image to ACR
-Now, before we can push the image to ACR, we need to create a custom NGINX configuration file (`nginx.conf`) to proxy requests from `/api` to the backend Flas app running on `localhost:5000` inside the pod.
+Now, before we can push the image to ACR, we need to create a custom NGINX configuration file (`nginx.conf`) to proxy requests from `/api` to the backend Flask app running on `localhost:5000` inside the pod.
 
 Create a file named `nginx.conf` in the `lab5_Multi_Container_Patterns/Simple_Frontend_Backend_Chat_App/ChatFrontend/chat-frontend` directory with the following content:
 
@@ -146,7 +146,7 @@ CMD ["nginx", "-g", "daemon off;"]
 
 Now we will create the frontend image again
 ```bash
-docker build -t chatfrontend:latest --build-arg VITE_BACKEND_URL=/api .
+docker build -t chatfrontend:latest .
 ```
 
 Now that we have the frontend service containerized and confirmed to be running locally, we can push it to a container registry. In this case, we will use Azure Container Registry (ACR).
