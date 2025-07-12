@@ -64,7 +64,7 @@ curl -X POST http://localhost:8000/chat \
   -d '{"message": "Hello, can you help me with Azure OpenAI?"}'
 ```
 
-Now that the application containerized and confirmed to be running locally, we can push it to a container registry. In this case, we will use Azure Container Registry (ACR).
+Now that the application is containerized and confirmed to be running locally, we can push it to a container registry. In this case, we will use Azure Container Registry (ACR).
 
 Run the following commands to get the name of the ACR and login.
 ```bash

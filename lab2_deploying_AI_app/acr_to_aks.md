@@ -4,7 +4,7 @@
 
 ### Using kubectl to create resource manifests
 
-Going back to the contoso-air application, we can create a Deployment resource to run the application in Kubernetes.
+Going back to the azure-openai-chat application, we can create a Deployment resource to run the application in Kubernetes.
 
 If you have never written a Kubernetes manifest file, you can use the Draft CLI to create a manifest file for you or use another common method which is to use the kubectl CLI to create a manifest file.
 
