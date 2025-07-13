@@ -268,12 +268,14 @@ Confirm your service is created and the load balancer is configured using the fo
 kubectl get service chatfrontend-service
 ```
 
-**Note:** The `EXTERNAL-IP` field may take a few minutes to be assigned. Once it is assigned, you can access the frontend service using that IP address.
+> **Tip:**  
+> The `EXTERNAL-IP` for your LoadBalancer service may take several minutes to appear. Once assigned, you can access the chat application's frontend by navigating to this IP address in your browser.
 
 For more detailed information about your service, use the following command.
 ```bash
 kubectl describe service chatfrontend-service
 ```
 
-**Note:** Navigating to the EXTERNAL-IP address of the load balancer service in your browser will allow you to access the frontend of the chat application. The frontend will communicate with the backend service using the ClusterIP service we created earlier.
+> **Note:**  
+> Once the LoadBalancer service's `EXTERNAL-IP` is available, you can access the chat application's frontend by entering this IP address in your browser. The frontend will seamlessly communicate with the backend via the ClusterIP service configured earlier, ensuring internal connectivity within your AKS cluster.
 
