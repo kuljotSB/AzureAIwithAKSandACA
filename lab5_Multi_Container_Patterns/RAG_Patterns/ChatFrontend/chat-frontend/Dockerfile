@@ -11,11 +11,6 @@ RUN npm ci
 # Copy the rest of the application files
 COPY . .
 
-# Accept a build argument for VITE_BACKEND_URL
-ARG VITE_BACKEND_URL
-# Set the VITE_BACKEND_URL in the .env file
-RUN echo "VITE_BACKEND_URL=$VITE_BACKEND_URL" > .env
-
 # Build the application
 RUN npm run build
 
@@ -25,8 +20,11 @@ FROM nginx:alpine AS production
 # Copy the built files to the Nginx web server directory
 COPY --from=build /app/dist /usr/share/nginx/html
 
+# Copy the custom NGINX configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Expose port 80
 EXPOSE 80
 
-# Start Nginx
+# Start NGINX
 CMD ["nginx", "-g", "daemon off;"]

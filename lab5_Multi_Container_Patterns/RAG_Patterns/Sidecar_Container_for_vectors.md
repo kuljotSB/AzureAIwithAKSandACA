@@ -103,12 +103,13 @@ spec:
           env:
             - name: QDRANT__SERVICE__HOST
               value: "0.0.0.0"
-          envFrom:
-            - configMapRef:
-                name: qdrant-config
+          
 
         - name: embed-sidecar
           image: $ACR_NAME.azurecr.io/vector-loader:latest
+          envFrom:
+            - configMapRef:
+                name: qdrant-config
           command: ["/bin/sh", "-c"]
           args:
             - |

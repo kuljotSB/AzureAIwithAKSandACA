@@ -16,7 +16,7 @@ function App() {
 
     try {
       console.log('Backend URL:', import.meta.env.VITE_BACKEND_URL);
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/chat`, {
+      const response = await fetch(`/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
