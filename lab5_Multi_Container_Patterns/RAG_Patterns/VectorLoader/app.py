@@ -5,42 +5,58 @@ import json
 from openai import AzureOpenAI
 from dotenv import load_dotenv
 import os
+import time
+
+print("Starting VectorLoader application...")
+time.sleep(20)  # Wait for Qdrant to be ready
+print("Waited for 20 seconds, now proceeding to load vector embeddings...")
 # Load environment variables from .env file
 load_dotenv()
 
+print("Loading environment variables...")
+print("QDRANT_CLIENT_URL: ", os.environ.get("QDRANT_CLIENT_URL"))
 # Initialize Qdrant client
 qdrant_client = QdrantClient(url=os.environ.get("QDRANT_CLIENT_URL"))
 
-# Creating a Collection
-qdrant_client.create_collection(
-    collection_name="margies_travel_embeddings",
-    vectors_config=VectorParams(size=1536, distance=Distance.DOT)
-)
+print("Initialized Qdrant client...")
 
-# Load data from data.json
-with open("data.json", "r") as json_file:
-    data = json.load(json_file)
+print("Creating collection in qdrantDB...")
+collection_name = "margies_travel_embeddings"
 
-# Construct the points list (this will be used when upserting vector embeddings)
-embedding_points = [
-    PointStruct(
-        id=index + 1,  # Use 1-based indexing for IDs
-        vector=entry["vector"],  # Embedding vector
-        payload={"text": entry["text"]}  # Use extracted text as payload
+if qdrant_client.collection_exists(collection_name):
+    # If the collection already exists, we can skip creation
+    print(f"Collection '{collection_name}' already exists.")
+else:
+    # Creating a Collection
+    qdrant_client.create_collection(
+            collection_name="margies_travel_embeddings",
+            vectors_config=VectorParams(size=1536, distance=Distance.DOT)
+        )
+
+    # Load data from data.json
+    with open("data.json", "r") as json_file:
+        data = json.load(json_file)
+
+    # Construct the points list (this will be used when upserting vector embeddings)
+    embedding_points = [
+        PointStruct(
+            id=index + 1,  # Use 1-based indexing for IDs
+            vector=entry["vector"],  # Embedding vector
+            payload={"text": entry["text"]}  # Use extracted text as payload
+        )
+        for index, entry in enumerate(data)
+    ]
+
+    print("created the vector embeddings point collection \n")
+    print(embedding_points)
+
+    # Now lets upsert our vector embeddings into the recently created collection
+
+    operation_info = qdrant_client.upsert(
+        collection_name="margies_travel_embeddings",
+        wait=True,
+        points=embedding_points
     )
-    for index, entry in enumerate(data)
-]
 
-print("created the vector embeddings point collection \n")
-print(embedding_points)
-
-# Now lets upsert our vector embeddings into the recently created collection
-
-operation_info = qdrant_client.upsert(
-    collection_name="margies_travel_embeddings",
-    wait=True,
-    points=embedding_points
-)
-
-print("upserted vector embeddings with operation_info: \n")
-print(operation_info)
+    print("upserted vector embeddings with operation_info: \n")
+    print(operation_info)

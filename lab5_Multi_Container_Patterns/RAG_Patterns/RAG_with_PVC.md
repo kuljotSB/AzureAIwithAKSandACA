@@ -149,6 +149,22 @@ spec:
   storageClassName: azurefile-csi
 ```
 
+Apply the PVC manifest to create the Persistent Volume Claim:
+```bash
+kubectl apply -f manifests/qdrant-pvc.yaml
+```
+To view the PV status, you can run the following command:
+```bash
+kubectl get pv
+```
+
+To view the status of the PVC, you can run the following command:
+```bash
+kubectl get pvc qdrant-pvc
+```
+
+>**NOTE**: The PVC will show `Pending` status until it is claimed by a PV. This is expected behavior as the PVC is waiting for a Persistent Volume to be bound to it. The PV also takes some time to be created and bound to the PVC, so please be patient.
+
 Next, we will create a `StatefulSet` definition for the entire RAG application. Create a file named `rag-app.yaml` in the `manifests` directory with the following content:
 
 ```yaml 
@@ -209,4 +225,9 @@ spec:
         - name: qdrant-storage
           persistentVolumeClaim:
             claimName: qdrant-pvc
+```
+
+Apply the StatefulSet manifest to create the StatefulSet:
+```bash
+kubectl apply -f manifests/rag-app.yaml
 ```

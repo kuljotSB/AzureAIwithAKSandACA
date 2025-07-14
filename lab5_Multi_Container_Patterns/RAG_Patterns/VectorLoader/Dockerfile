@@ -18,4 +18,3 @@ COPY . .
 # Expose application port (change as needed)
 EXPOSE 5173
 
-
