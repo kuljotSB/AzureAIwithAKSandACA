@@ -188,23 +188,20 @@ spec:
           image: qdrant/qdrant:latest
           ports:
             - containerPort: 6333
+          env:
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
           volumeMounts:
             - name: qdrant-storage
-              mountPath: /qdrant/storage/$(HOSTNAME)
+              mountPath: /qdrant/storage
+              subPathExpr: $(HOSTNAME)
 
         - name: vector-loader
           image: $ACR_NAME.azurecr.io/vector-loader
           ports:
             - containerPort: 5173
-          command: ["/bin/sh", "-c"]
-          args:
-            - |
-              echo "Waiting for Qdrant...";
-              until curl -s http://localhost:6333; do
-                sleep 2;
-              done;
-              echo "Running embedding upsert script...";
-              python /app/app.py
           envFrom:
             - configMapRef:
                 name: vectorloader-config
@@ -221,6 +218,7 @@ spec:
           image: $ACR_NAME.azurecr.io/chat-frontend
           ports:
             - containerPort: 80
+
       volumes:
         - name: qdrant-storage
           persistentVolumeClaim:
@@ -231,3 +229,65 @@ Apply the StatefulSet manifest to create the StatefulSet:
 ```bash
 kubectl apply -f manifests/rag-app.yaml
 ```
+
+To check the status of the StatefulSet, you can run the following command:
+```bash
+kubectl get statefulsets
+```
+To check the status of the pods, you can run the following command:
+```bash
+kubectl get pods
+```
+You should see the `rag-app` StatefulSet listed with the number of replicas and their status. The pods should be in a `Running` state.
+
+To check the description and processes of a specific pod, you can run the following command:
+```bash
+kubectl describe pod <pod-name>
+```
+
+Now lets check the logs of the `VectorLoader` container to ensure that it has successfully loaded the vectors into QDrantDB:
+```bash
+kubectl logs <pod-name> -c vector-loader
+```
+>**Note**: You should replace `<pod-name>` with the actual name of the pod running the `VectorLoader` container. You should see logs indicating that the vectors have been successfully uploaded to the QDrantDB instance.
+
+### Viewing the QDrantDB Instance
+You can access the QDrantDB instance using the following command:
+```bash
+kubectl port-forward statefulset/rag-app 6333:6333
+```
+
+Navigate to `http://localhost:6333/dashboard` in your web browser to access the QDrantDB instance. You can use the QDrantDB web interface to explore the data and perform queries.
+
+![qdrant_db_instance](./Assets/qdrant_db_instance.png)
+
+To verify if the `qdrant` container is indeed mounted to the Azure File Share, you can run the following command to check the mounted volumes:
+```bash
+kubectl exec -it <pod-name> -- df -h
+```
+
+### Accessing the ChatFrontend Application
+To access the `ChatFrontend` application, you can use port forwarding to expose the frontend service on your local machine. Run the following command:
+
+```bash
+kubectl port-forward statefulset/rag-app 80:80
+```
+
+Try a couple of queries in the chat frontend. You can use the following sample queries:
+```plaintext
+- what is margies travel?
+- can you tell me about the leadership of Margie's Travel?
+- what travel accomodations are offered in dubai?
+- what are options available in las vegas?
+- what travel accomodations are offered in las vegas?
+```
+
+![RAG_app](./Assets/RAG_app.png)
+---
+![las_vegas](./Assets/las_vegas.png)
+
+### Conclusion
+In this lab, you have successfully set up a Retrieval-Augmented Generation (RAG) application using Azure OpenAI, QDrantDB, and Azure File Share with Persistent Volume Claims (PVC). You have containerized the `VectorLoader`, `ChatBackend`, and `ChatFrontend` applications, deployed them in a Kubernetes cluster, and verified that the data was loaded into QDrantDB. You also accessed the QDrantDB instance and interacted with the chat frontend application.
+
+🚀 **Congratulations!**  
+You’ve just completed a challenging lab that brought together Azure OpenAI, QDrantDB, Kubernetes, and persistent cloud storage. By containerizing, deploying, and integrating these components, you’ve gained hands-on experience with advanced cloud-native patterns and AI workloads. This is a major achievement—well done!

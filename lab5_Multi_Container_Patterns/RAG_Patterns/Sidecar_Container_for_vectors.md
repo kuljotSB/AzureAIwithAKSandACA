@@ -103,29 +103,20 @@ spec:
           env:
             - name: QDRANT__SERVICE__HOST
               value: "0.0.0.0"
-          envFrom:
-            - configMapRef:
-                name: qdrant-config
 
         - name: embed-sidecar
           image: $ACR_NAME.azurecr.io/vector-loader:latest
-          command: ["/bin/sh", "-c"]
-          args:
-            - |
-              echo "Waiting for Qdrant...";
-              until curl -s http://localhost:6333; do
-                sleep 2;
-              done;
-              echo "Running embedding upsert script...";
-              python /app/app.py
-
+          ports:
+            - containerPort: 5173
+          envFrom:
+            - configMapRef:
+                name: qdrant-config
 ```
 
 >**Note:** Make sure to replace `$ACR_NAME` with your actual Azure Container Registry name in the `qdrantdb.yaml` file.
 
 >**YAML Explanation:**
 - The `embed-sidecar` container that runs the `VectorLoader` application.
-- The `command` and `args` fields ensure that the Sidecar Container waits for the QDrantDB instance to be ready before running the embedding upsert script. What this does is it checks if the QDrantDB instance is running by sending a request to `http://localhost:6333` and waits until it gets a response. Once the QDrantDB instance is ready, it runs the `app.py` script to preload vectors into the database.
 - The `containers` section defines the main `qdrant` container that runs the QDrantDB instance.
 
 Next, run the following command to deploy the `qdrant-with-sidecar` deployment in your Kubernetes cluster:

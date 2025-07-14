@@ -18,3 +18,4 @@ COPY . .
 # Expose application port (change as needed)
 EXPOSE 5173
 
+CMD ["python", "app.py"]
