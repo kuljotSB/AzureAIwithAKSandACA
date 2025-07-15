@@ -1,6 +1,6 @@
 ## Setting up Azure Managed NGINX Ingress Controller
 
-![Nginx_Ingress](./Assets/Nginx_Ingress.png)
+![Nginx_Ingress](./Assets/NGINX_Ingress.png)
 
 ### Lab Prerequisites
 In this lab, you will set up an Azure Managed NGINX Ingress Controller in your AKS cluster. Before starting, ensure you have the following prerequisites:
