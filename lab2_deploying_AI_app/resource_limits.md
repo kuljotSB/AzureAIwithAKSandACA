@@ -1,4 +1,4 @@
-![Resource Limits](./Assets/yaml_resource_limits.png)
+![Resource Limits](./Assets/YAML_resource_limits.png)
 
 ## Resource Limits in Kubernetes
 Resource limits in Kubernetes are used to control the amount of CPU and memory resources that a container can use. This is important for ensuring that no single container can monopolize the resources of a node, which could lead to performance issues or even crashes of other containers running on the same node.
