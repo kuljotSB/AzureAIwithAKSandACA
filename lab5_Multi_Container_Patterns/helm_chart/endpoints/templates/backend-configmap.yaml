@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Values.configMaps.chatBackend }}
-data:
-  AZURE_API_URL: {{ .Values.chatBackendConfigs.AZURE_API_URL | quote }}
-  AZURE_API_KEY: {{ .Values.chatBackendConfigs.AZURE_API_KEY | quote }}
-  AZURE_MODEL_NAME: {{ .Values.chatBackendConfigs.AZURE_MODEL_NAME | quote }}
-  EMBEDDING_MODEL_NAME: {{ .Values.chatBackendConfigs.EMBEDDING_MODEL_NAME | quote }}

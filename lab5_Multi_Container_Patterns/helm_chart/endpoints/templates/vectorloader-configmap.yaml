@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Values.configMaps.vectorLoader }}
-data:
-  QDRANT_CLIENT_URL: {{ .Values.vectorLoaderConfig.QDRANT_CLIENT_URL | quote }}
