@@ -1,4 +1,4 @@
-![Deploying AI App from ACR to AKS](./Assets/acr_to_aks.png)
+![Deploying AI App from ACR to AKS](./Assets/ACR_to_AKS.png)
 
 ## Deploy an AI App from ACR to AKS (Azure Container Registry to Azure Kubernetes Service)
 
