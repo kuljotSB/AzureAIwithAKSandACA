@@ -15,7 +15,7 @@ kubectl get deployments
 ```
 
 ```bash
-kubectl gets pods
+kubectl get pods
 ```
 
 ### Create a Manifest file with Pod Anti-Affinity
