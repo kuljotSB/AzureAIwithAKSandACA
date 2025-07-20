@@ -21,7 +21,7 @@ kubectl get deployments
 kubectl gets pods
 ```
 
-### Create a Manifest file with Pod Anti-Affinity
+### Create a Manifest file with Resource Limits
 Run the following command to create a templated manifest file with ACR integration
 
 ```bash
