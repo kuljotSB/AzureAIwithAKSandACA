@@ -122,7 +122,7 @@ spec:
       - image: $ACR_NAME.azurecr.io/aoaipythonapp:latest
         name: aoaipythonapp
         ports:
-        - containerPort: 80
+        - containerPort: 5000
         resources: {}
         envFrom:
         - configMapRef:
