@@ -51,16 +51,16 @@ spec:
       labels:
         app: chatbackend
     spec:
-     affinity: 
-       podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-             - key: app
-               operator: In
-               values:
-               - chatbackend
-          topologyKey: kubernetes.io/hostname
+      affinity: 
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - chatbackend
+              topologyKey: kubernetes.io/hostname
       containers:
         - name: chatbackend
           image: $ACR_NAME.azurecr.io/chatbackend:latest
