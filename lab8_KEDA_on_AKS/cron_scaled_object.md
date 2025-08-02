@@ -214,7 +214,7 @@ Use the following command to list the scaled pods
 kubectl get pods
 ```
 
->**Note**: The pods will scale up to a maximum of 5 replicas during the specified time range (7th to 10th minute of every hour) and scale down to 1 replica outside this time range. You can change the time range in the `cron_scaled_object_hpa.yaml` file to test different scaling scenarios. Even though the time ranges would change, the scaling logic still remains the same.
+>**Note**: The pods will scale up to a maximum of 5 replicas during the specified time range and scale down to 1 replica outside this time range. You can change the time range in the `cron_scaled_object_hpa.yaml` file to test different scaling scenarios. Even though the time ranges would change, the scaling logic still remains the same.
 
 You can also check the logs of the KEDA operator to see if it is processing the ScaledObject correctly:
 ```bash

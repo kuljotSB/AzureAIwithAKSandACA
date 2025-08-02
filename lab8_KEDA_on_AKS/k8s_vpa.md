@@ -10,13 +10,9 @@ containers in your Kubernetes cluster based on historical usage data. This helps
 Make sure that you are done with the [Cron Scaled Object](./cron_scaled_object.md) lab before proceeding with this lab. We will be using the same application and environment variables.
 
 ### Installing VPA on AKS
-Run the following commands to install the VPA CRDs and controllers onto your AKS cluster:
+Run the following command to install the VPA CRDs and controllers onto your AKS cluster:
 ```bash
-# Install the CRDs
-kubectl apply -f https://github.com/kubernetes/autoscaler/releases/download/vertical-pod-autoscaler-0.13.0/vpa-v1-crd.yaml
-
-# Install the VPA components (recommender, updater, admission-controller)
-kubectl apply -f https://github.com/kubernetes/autoscaler/releases/download/vertical-pod-autoscaler-0.13.0/vpa.yaml
+az aks update --name <cluster-name> --resource-group <resource-group-name> --enable-vpa
 ```
 
 You can verify your installation with the following command:
