@@ -348,4 +348,3 @@ Now you can access the frontend at `http://localhost:8080`.
 
 >**Note**: The frontend is now accessible and can communicate with the backend securely over mTLS since both of them reside in the `azureopenai` namespace which is configured for mTLS by the istio service mesh.
 
-
