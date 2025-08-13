@@ -1,3 +1,9 @@
+---
+layout: page   # or 'default' (anything that's NOT a 'home' layout)
+title: AKS + Istio Labs
+permalink: /
+---
+
 # AKS + Istio Labs
 
 Welcome! Pick a Lab:

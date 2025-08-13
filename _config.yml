@@ -1,7 +1,11 @@
 title: AKS + Istio Labs
 description: Hands-on labs for my Udemy course
-theme: minima   # or pick any Pages theme
+theme: minima
 markdown: kramdown
 
-# GitHub Pages settings
-repository: kuljotsb/AzureAIwithAKSandACA
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: page
