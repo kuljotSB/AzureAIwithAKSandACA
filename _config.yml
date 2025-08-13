@@ -3,23 +3,5 @@ description: Hands-on labs for my Udemy course
 theme: minima   # or pick any Pages theme
 markdown: kramdown
 
-# if your images live in ./Assets, links like ![alt](./Assets/pic.png) work
-
-# Site navigation
-collections:
-  labs:
-    output: true
-    permalink: /:path/
-
-# Exclude files and folders from the site build
-exclude:
-  - node_modules
-  - README.md
-  - LICENSE
-  - .gitignore
-
-# Build settings
-permalink: pretty
-
 # GitHub Pages settings
 repository: kuljotsb/AzureAIwithAKSandACA
