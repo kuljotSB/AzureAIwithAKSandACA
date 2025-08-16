@@ -83,7 +83,7 @@ docker push $ACR_NAME.azurecr.io/chatbackend:latest
 Create a `ConfigMap` for the backend workload:
 ```bash
 kubectl create configmap chatbackend-configs -n azureopenai \
---from-literal=AZURE_API_URL=$AZURE_OPENAI_ENDPOINT \
+--from-literal=AZURE_API_URL=$AZURE_API_URL \
 --from-literal=AZURE_API_KEY=$AZURE_API_KEY \
 --from-literal=AZURE_MODEL_NAME=$AZURE_MODEL_NAME
 ```
