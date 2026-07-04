@@ -23,9 +23,7 @@ function App() {
         },
         body: JSON.stringify({
           messages: [...messages, userMessage],
-          max_tokens: 4096,
           temperature: 1,
-          top_p: 1,
           model: import.meta.env.VITE_AZURE_MODEL_NAME,
         }),
       });

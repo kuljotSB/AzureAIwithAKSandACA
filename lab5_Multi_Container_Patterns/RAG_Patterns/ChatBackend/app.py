@@ -70,11 +70,7 @@ def chat():
                                          user query: {user_message} \n
                                          supporting_text: {supporting_text_content}"""}
         ],
-        max_tokens=8192,
         temperature=0.7,
-        top_p=0.95,
-        frequency_penalty=0.0,
-        presence_penalty=0.0,
         model=AZURE_OPENAI_MODEL_NAME,
     )
 

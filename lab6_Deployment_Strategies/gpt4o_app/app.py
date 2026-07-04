@@ -27,7 +27,6 @@ def chat():
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": user_message},
         ],
-        max_tokens=8192,
         temperature=0.7,
         model=AZURE_OPENAI_MODEL_NAME,
     )
